@@ -1,0 +1,116 @@
+/* src/App.css - Fütüristik Neon Tema */
+
+/* Temel Stil ve Body Ayarları */
+body {
+    /* Karanlık, havalı arkaplan */
+    background: linear-gradient(135deg, #1f1c2c, #000000); 
+    font-family: 'Space Mono', monospace, Arial, sans-serif; /* Fütüristik font (varsa) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+/* Ana Kapsayıcı (Hafif Şeffaf Kutu) */
+.calculator-wrapper {
+    width: 100%;
+    max-width: 400px; 
+    background: rgba(255, 255, 255, 0.05); /* Çok hafif şeffaf */
+    /* Kutuya yumuşak bir dış parıltı (neon) ver */
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.15); 
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Görüntü Alanı (Display) */
+.display-area {
+    padding: 30px 20px 10px;
+    background: rgba(0, 0, 0, 0.2); /* Daha koyu şeffaf */
+    text-align: right;
+    color: white;
+}
+
+.formula-text {
+    font-size: 16px;
+    color: #00ffff; /* Neon mavi */
+    height: 20px; 
+    opacity: 0.7;
+    font-weight: 500;
+}
+
+.display-text {
+    font-size: 4.5em; 
+    font-weight: 700;
+    color: #e0f7fa;
+    overflow-x: auto; 
+    white-space: nowrap; 
+}
+
+/* Buton Izgarası */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    /* Butonlar arasında boşluk bırakmak yerine koyu bir çizgi kullanırız */
+    gap: 1px; 
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.buttons-grid button {
+    border: none;
+    padding: 25px 0; /* Düğmeleri daha büyük yap */
+    font-size: 1.4em;
+    cursor: pointer;
+    background-color: #1a1a1a; /* Koyu buton arkaplanı */
+    color: #e0e0e0;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    aspect-ratio: 1 / 1; 
+}
+
+/* Buton Etkileşimleri (Neon Etkisi) */
+.buttons-grid button:hover {
+    background-color: #333333;
+}
+.buttons-grid button:active {
+    background-color: #444444;
+}
+
+
+/* Fonksiyon Butonları (AC, %, vb.) */
+.buttons-grid .function {
+    background-color: #303030;
+    color: #00ffff; /* Neon mavi yazı */
+    font-weight: 500;
+}
+.buttons-grid .function:hover {
+    box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.5); /* Hafif neon gölge */
+}
+
+/* Operatör Butonları (+, -, *, /) */
+.buttons-grid .operator {
+    background-color: #ff5757; /* Kırmızımsı neon */
+    color: #ffffff;
+    font-weight: 600;
+}
+.buttons-grid .operator:hover {
+    background-color: #ff4040;
+    box-shadow: 0 0 10px rgba(255, 87, 87, 0.7); /* Güçlü neon gölge */
+}
+
+/* Eşittir Butonu (=) */
+.buttons-grid .equals {
+    background-color: #00d462; /* Yeşil neon */
+}
+.buttons-grid .equals:hover {
+    background-color: #00b050;
+    box-shadow: 0 0 10px rgba(0, 212, 98, 0.8);
+}
+
+/* '0' Butonu */
+.buttons-grid .zero {
+    grid-column: span 2; 
+    aspect-ratio: unset; 
+}
