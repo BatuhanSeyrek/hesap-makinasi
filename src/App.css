@@ -1,95 +1,120 @@
-/* src/App.css - Fütüristik Neon Tema */
+/* src/App.css - Media Query ile Akıllı Mobil Uyum */
 
-/* Temel Stil ve Body Ayarları */
+/* TEMEL MASAÜSTÜ VE GENEL STİLLER */
 body {
-    /* Karanlık, havalı arkaplan */
     background: linear-gradient(135deg, #1f1c2c, #000000); 
-    font-family: 'Space Mono', monospace, Arial, sans-serif; /* Fütüristik font (varsa) */
+    font-family: 'Helvetica Neue', Arial, sans-serif; 
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 20px; /* Masaüstünde biraz boşluk bırakır */
+    
+    /* Yatay kaydırmayı engeller */
+    overflow-x: hidden; 
 }
 
-/* Ana Kapsayıcı (Hafif Şeffaf Kutu) */
+/* Ana Kapsayıcı (Masaüstünde Sınırlı Boyut) */
 .calculator-wrapper {
     width: 100%;
-    max-width: 400px; 
-    background: rgba(255, 255, 255, 0.05); /* Çok hafif şeffaf */
-    /* Kutuya yumuşak bir dış parıltı (neon) ver */
-    box-shadow: 0 0 40px rgba(0, 255, 255, 0.15); 
-    border-radius: 20px;
+    max-width: 400px; /* Masaüstünde bu sınıra takılır */
+    min-height: 70vh; /* Minimum dikey boyut */
+    
+    background: rgba(255, 255, 255, 0.05); /* Şeffaflık */
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.15); /* Neon gölge */
+    border-radius: 20px; /* Köşeleri yuvarlak */
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* İçerik düzeni */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Butonları alta iter */
+    transition: all 0.3s ease-in-out; /* Yumuşak geçiş */
 }
 
-/* Görüntü Alanı (Display) */
+/* DİNAMİK MOBİL UYUM (SADECE EKRAN KÜÇÜLDÜĞÜNDE TAM EKRAN OLUR) */
+@media (max-width: 768px) {
+    body {
+        padding: 0; /* Boşlukları kaldır */
+        align-items: stretch; /* Dikeyde tam uzama */
+    }
+
+    .calculator-wrapper {
+        /* 💥 MOBİLDE TAM EKRAN YAPAR */
+        width: 100vw; 
+        min-height: 100vh; 
+        border-radius: 0; /* Köşe yuvarlaklıklarını kaldır */
+        box-shadow: none; 
+        max-width: unset; /* Masaüstü sınırını kaldır */
+    }
+}
+
+/* GÖRÜNTÜ ALANI (DISPLAY) STİLLERİ */
+
 .display-area {
     padding: 30px 20px 10px;
-    background: rgba(0, 0, 0, 0.2); /* Daha koyu şeffaf */
+    background: rgba(0, 0, 0, 0.2);
     text-align: right;
     color: white;
+    flex-grow: 0;
 }
 
 .formula-text {
-    font-size: 16px;
+    font-size: 18px;
     color: #00ffff; /* Neon mavi */
-    height: 20px; 
+    height: 20px;
     opacity: 0.7;
-    font-weight: 500;
 }
 
 .display-text {
-    font-size: 4.5em; 
-    font-weight: 700;
+    font-size: 4em;
+    font-weight: 300;
     color: #e0f7fa;
-    overflow-x: auto; 
-    white-space: nowrap; 
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
-/* Buton Izgarası */
+/* BUTONLAR (GRID) STİLLERİ */
+
 .buttons-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    /* Butonlar arasında boşluk bırakmak yerine koyu bir çizgi kullanırız */
-    gap: 1px; 
+    /* 4 eşit sütun oluşturur */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
     background-color: rgba(0, 0, 0, 0.3);
+    /* Dikeyde kalan tüm alanı kaplamasını sağlar */
+    flex-grow: 1; 
 }
 
 .buttons-grid button {
     border: none;
-    padding: 25px 0; /* Düğmeleri daha büyük yap */
-    font-size: 1.4em;
+    padding: 25px 0;
+    font-size: 1.5em;
     cursor: pointer;
-    background-color: #1a1a1a; /* Koyu buton arkaplanı */
+    background-color: #1a1a1a;
     color: #e0e0e0;
     transition: background-color 0.2s, box-shadow 0.2s;
-    aspect-ratio: 1 / 1; 
+    /* Butonları Kare Yapar */
+    aspect-ratio: 1 / 1;
 }
 
-/* Buton Etkileşimleri (Neon Etkisi) */
+/* Buton Renkleri ve Etkileşimler */
 .buttons-grid button:hover {
     background-color: #333333;
 }
-.buttons-grid button:active {
-    background-color: #444444;
-}
 
-
-/* Fonksiyon Butonları (AC, %, vb.) */
 .buttons-grid .function {
     background-color: #303030;
-    color: #00ffff; /* Neon mavi yazı */
+    color: #00ffff; /* Neon mavi */
     font-weight: 500;
 }
 .buttons-grid .function:hover {
-    box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.5); /* Hafif neon gölge */
+    box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
-/* Operatör Butonları (+, -, *, /) */
 .buttons-grid .operator {
     background-color: #ff5757; /* Kırmızımsı neon */
     color: #ffffff;
@@ -97,10 +122,9 @@ body {
 }
 .buttons-grid .operator:hover {
     background-color: #ff4040;
-    box-shadow: 0 0 10px rgba(255, 87, 87, 0.7); /* Güçlü neon gölge */
+    box-shadow: 0 0 10px rgba(255, 87, 87, 0.7); 
 }
 
-/* Eşittir Butonu (=) */
 .buttons-grid .equals {
     background-color: #00d462; /* Yeşil neon */
 }
@@ -109,8 +133,8 @@ body {
     box-shadow: 0 0 10px rgba(0, 212, 98, 0.8);
 }
 
-/* '0' Butonu */
+/* '0' Butonunun Genişliği */
 .buttons-grid .zero {
     grid-column: span 2; 
-    aspect-ratio: unset; 
+    aspect-ratio: unset;
 }
